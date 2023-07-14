@@ -1,0 +1,146 @@
+; Softe Audio Converter localization
+; charset=utf-8
+
+[Profile]
+Language=Chinese(Simplified)
+Translator=
+
+[String]
+&File=文件(&F)
+&Edit=编辑(&E)
+&Help=帮助(&H)
+&Tools=工具(&T)
+&View=查看(&V)
+About=关于
+Add Selection=添加选段
+Add to CD Burner=添加到CD烧录器
+Album=专辑
+Artist=艺术家
+Audio File Merger=音频文件合并
+Audio File Splitter=音频文件分割
+Audio Format Conversion=音频格式转换
+Automatic=自动
+Begin=开始
+bit=位
+Browse=浏览
+Burn=烧录
+Buy Now=立即购买
+Cancel=取消
+CD Burner=CD烧录器
+CD Recorder=CD刻录机
+Close=关闭
+Contents=内容
+Continue Trial=继续试用
+Comment=注释
+Convert=转换
+Conversion=转换
+Copy=复制
+Copyright=版权
+Custom=定制
+Cut=剪切
+Date Modified=修改日期
+Delete=删除
+Deleted=已删除
+Delete original files=删除原文件
+Done=完成
+E&xit=退出(&X)
+Eject=弹出
+Enable volume normalizing=启用音量匀化
+End=结束
+Export File List=导出文件列表
+Extension=扩展
+Failed=失败
+Feedback and Support=反馈和支持
+File=文件
+File Browser=文件浏览器
+File List=文件列表
+Folder=文件夹
+Format=格式
+General=常规
+Hardware ID=机器码
+Help=帮助
+How to Buy=如何购买
+ID3 Tag=ID3标签
+Input=输入
+Length=长度
+Location=位置
+Loop=循环
+Mark Duplicate Files=标记重复文件
+Merge=合并
+Minimize to System Tray=最小化时缩小到系统托盘
+Mono=单声
+Move=移动
+Move down=下移
+Move to bottom=移动到底部
+Move to top=移动到顶部
+Move up=上移
+Name=名称
+New Folder=新建文件夹
+Normalize to=匀化至
+OK=确定
+Options=选项
+Output=输出
+Paste=粘贴
+Pause=暂停
+Play=播放
+Quality=品质
+Refresh=刷新
+Register=注册
+Registered To=注册给
+Registration Code=注册码
+Remove=移除
+Remove All=全部移除
+Rename=重命名
+Repeat=重复
+Retain ID3 Tag=保留ID3标签
+Search=寻找
+Select All=全选
+Selection=选段
+Sequence=顺序
+Size=尺寸
+Sound Recorder=录音机
+Split=分割
+Status=状态
+Stereo=立体声
+Stop=停止
+Task=任务
+Title=标题
+Trial Version=试用版
+Type=类型
+Unregistered=未注册
+User Name=用户名
+Year=年代
+Your Name=你的名字
+
+
+
+Tracks: %s, Total Time: %s=音轨数: %s, 总时间: %s
+
+
+- Converting is limited to 60 seconds.=- 转换限制为60秒。
+- Merging is limited to 30 seconds.=- 合并限制为30秒。
+- Splitting is limited to 60 seconds.=- 分割限制为60秒。
+
+If you haven't yet paid the registration fee, please click Buy Now to purchase a full version.=如果你还没有付注册费，请点击立即购买来购买完全版。
+On payment approval, the registration code will be sent to you. Please copy and paste Your Name and Registration Code into the field below :=付款一经确认，注册码就会发送给你。请复制你的名字和注册码，并粘贴到下面这个地方：
+Thank you for trying Softe Audio Converter!=谢谢你试用Softe Audio Converter!
+Enjoy the full features without time restrictions, please buy a full version.=没有时间限制地尽情享用全功能，请购买完全版。
+Trial version restrictions=试用版限制
+
+
+
+
+;;;;;;;;;;;;;
+;;  translation updates for v1.49 and later versions
+
+Bits per Sample=样本精度
+Channels=声道数
+Fastest=最快
+Home=首页
+Input Format=输入格式
+Lyrics=歌词
+Max Write Speed=最大写入速度
+Record=录音
+Sample Rate=采样率
+Tutorials=教程
+Write Speed=写入速度

@@ -1,0 +1,157 @@
+; Softe Audio Converter localization
+; charset=utf-8
+
+[Profile]
+; Language=English
+Translator=
+
+[String]
+&File=
+&Edit=
+&Help=
+&Tools=
+&View=
+About=
+Add Selection=
+Add to CD Burner=
+Album=
+Artist=
+Audio File Merger=
+Audio File Splitter=
+Audio Format Conversion=
+Automatic=
+Begin=
+bit=
+Browse=
+Burn=
+Buy Now=
+Cancel=
+CD Burner=
+CD Recorder=
+Close=
+Contents=
+Continue Trial=
+Comment=
+Convert=
+Conversion=
+Copy=
+Copyright=
+Custom=
+Cut=
+Date Modified=
+Delete=
+Deleted=
+Delete original files=
+Done=
+E&xit=
+Eject=
+Enable volume normalizing=
+End=
+Export File List=
+Extension=
+Failed=
+Fastest=
+Feedback and Support=
+File=
+File Browser=
+File List=
+Find Duplicate Files=
+Folder=
+Format=
+General=
+Hardware ID=
+Help=
+How to Buy=
+ID3 Tag=
+Input=
+Length=
+Location=
+Loop=
+Mark Duplicate Files=
+Max Write Speed=
+Merge=
+Minimize to System Tray=
+Mono=
+Move=
+Move down=
+Move to bottom=
+Move to top=
+Move up=
+Name=
+New Folder=
+Normalize to=
+OK=
+Options=
+Output=
+Paste=
+Pause=
+Play=
+Quality=
+Refresh=
+Register=
+Registered To=
+Registration Code=
+Remove=
+Remove All=
+Rename=
+Repeat=
+Retain ID3 Tag=
+Search=
+Select All=
+Selection=
+Sequence=
+Size=
+Sound Recorder=
+Split=
+Status=
+Stereo=
+Stop=
+Task=
+Title=
+Trial Version=
+Type=
+Unregistered=
+Write Speed=
+Year=
+Your Name=
+
+
+Tracks: %s, Total Time: %s=
+
+
+
+- Converting is limited to 60 seconds.=
+- Merging is limited to 30 seconds.=
+- Splitting is limited to 60 seconds.=
+
+If you haven't yet paid the registration fee, please click Buy Now to purchase a full version.=
+
+On payment approval, the registration code will be sent to you. Please copy and paste Your Name and Registration Code into the field below :=
+
+Thank you for trying Softe Audio Converter!=
+
+Enjoy the full features without time restrictions, please buy a full version.=
+
+Trial version restrictions=
+
+
+
+;;;;;;;;;;;;;
+;;  translation updates for v1.49 and later versions
+
+
+Bits per Sample=
+Channels=
+Fastest=
+Home=
+Input Format=
+Lyrics=
+Max Write Speed=
+Record=
+Sample Rate=
+Tutorials=
+Write Speed=
+
+
+
+

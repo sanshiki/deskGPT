@@ -1,0 +1,139 @@
+; Softe Audio Converter localization
+; charset=utf-8
+
+
+[Profile]
+Language=Portuguese
+Tradutor=Jos?M. E. Fernandes <jose.fernandes at oninetspeed.pt>
+Versão=1.31
+Data=01/09/2005
+Comentários=Se verificar algum erro de tradução, por favor, avise o tradutor o mais rapidamente possível. Obrigado.
+
+[String]
+&File=&Ficheiro
+&Edit=&Editar
+&Help=&Ajuda
+&Tools=&Ferramentas
+&View=&Ver
+About=Acerca de
+Add Selection=Adicionar Selecção
+Add to CD Burner=Enviar para gravador de CD
+Album=Albúm
+Artist=Artista
+Audio File Merger=Fundir Ficheiros Áudio
+Audio File Splitter=Dividir Ficheiros Áudio
+Audio Format Conversion=Conversão do Formato Áudio
+Automatic=Automático
+Begin=Iniciar
+bit=bit
+Browse=Navegar
+Burn=Gravar
+Buy Now=Comprar Agora
+Cancel=Cancelar
+CD Burner=Gravador de CD
+CD Recorder=Gravador de CD
+Close=Fechar
+Contents=Conteúdos
+Continue Trial=Continuar Experiência
+Comment=Comentário
+Convert=Converter
+Conversion=Conversão
+Copy=Copiar
+Copyright=Copyright
+Custom=Padrão
+Cut=Cortar
+Date Modified=Data de Modificação
+Delete=Eliminar
+Deleted=Eliminado
+Delete original files=Eliminar Ficheiro Original
+Done=Pronto
+E&xit=S&air
+Eject=Ejectar
+Enable volume normalizing=Permitir volume normal
+End=Fim
+Export File List=Exportar Lista de Ficheiros
+Exported by Softe Audio Converter=Exportado por Softe Audio Converter
+Extension=Extensão
+Failed=Falhado
+Feedback and Support=Retorno e Suporte
+File=Ficheiro
+File Browser=Navegador de Ficheiros
+File List=Lista de Ficheiros
+Find Duplicate Files=Procurar Ficheiros Duplicados
+Folder=Pasta
+Format=Formato
+General=Geral
+Hardware ID=ID da Hardware
+Help=Ajuda
+How to Buy=Como Comprar
+ID3 Tag=Rótulo ID3
+Input=Origem
+Length=Duração
+Location=Localização
+Loop=Repetir a Sequência
+Mark Duplicate Files=Marcar Ficheiros Duplicados
+Merge=Fundir
+Minimize to System Tray=Minimizar para a Bandeja
+Mono=Mono
+Move=Mover
+Move down=Mover para baixo
+Move to bottom=Mover para o fundo
+Move to top=Mover para o topo
+Move up=Mover para cima
+Name=Nome
+New Folder=Nova Pasta
+Normalize to=Normalizar para
+OK=OK
+Options=Opções
+Output=Resultado
+Paste=Colar
+Pause=Pausa
+Play=Reproduzir
+Quality=Qualidade
+Refresh=Actualizar
+Register=Registar
+Registered To=Registado para
+Registration Code=Código de Registo
+Remove=Remover
+Remove All=Remover Tudo
+Rename=Mudar o Nome
+Repeat=Repetir
+Retain ID3 Tag=Manter Rótulo ID3
+Search=Buscar
+Select All=Seleccionar Tudo
+Selection=Selecção
+Sequence=Sequência
+Size=Tamanho
+Sound Recorder=Gravador de Som
+Split=Dividir
+Status=Estado
+Stereo=Estéreo
+Stop=Parar
+Task=Tarefa
+Title=Título
+Trial Version=Versão Experimental
+Type=Tipo
+Unregistered=Não Registado
+Year=Ano
+Your Name=O seu Nome
+
+
+Tracks: %s, Total Time: %s=Faixas: %s, Tempo Total: %s
+
+
+
+- Converting is limited to 60 seconds.=- A conversão est?limitada a 60 segundos.
+- Merging is limited to 30 seconds.=- A fusão est?limitada a 30 segundos.
+- Splitting is limited to 60 seconds.=- A divisão est?limitada a 60 segundos.
+
+If you haven't yet paid the registration fee, please click Buy Now to purchase a full version.=Se ainda não pagou a taxa de registo, por favor, carregue em Comprar Agora para adquirir a versão completa.
+
+On payment approval, the registration code will be sent to you. Please copy and paste Your Name and Registration Code into the field below :=Logo que o pagamento se encontre aprovado, o código de registo ser-lhe-?enviado. Por favor, copie e cole O seu Nome e o Código de Registo nos campos em baixo:
+
+Thank you for trying Softe Audio Converter!=Obrigado por testar Softe Audio Converter!
+
+Enjoy the full features without time restrictions, please buy a full version.=Disfrute de todas as funções sem limitações de tempo, por favor, adquira a versão completa.
+
+Trial version restrictions=Limitações da versão experimental
+
+

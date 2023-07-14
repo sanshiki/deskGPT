@@ -1,0 +1,32 @@
+usbtest\i2s.o: ../Core/Src/i2s.c
+usbtest\i2s.o: ../Core/Inc/i2s.h
+usbtest\i2s.o: ../Core/Inc/main.h
+usbtest\i2s.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h
+usbtest\i2s.o: ../Core/Inc/stm32f1xx_hal_conf.h
+usbtest\i2s.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h
+usbtest\i2s.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h
+usbtest\i2s.o: ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h
+usbtest\i2s.o: ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h
+usbtest\i2s.o: ../Drivers/CMSIS/Include/core_cm3.h
+usbtest\i2s.o: D:\Program Files\Keil5\ARM\ARMCC\Bin\..\include\stdint.h
+usbtest\i2s.o: ../Drivers/CMSIS/Include/cmsis_version.h
+usbtest\i2s.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
+usbtest\i2s.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
+usbtest\i2s.o: ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h
+usbtest\i2s.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h
+usbtest\i2s.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
+usbtest\i2s.o: D:\Program Files\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
+usbtest\i2s.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h
+usbtest\i2s.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h
+usbtest\i2s.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h
+usbtest\i2s.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_exti.h
+usbtest\i2s.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h
+usbtest\i2s.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h
+usbtest\i2s.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h
+usbtest\i2s.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h
+usbtest\i2s.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h
+usbtest\i2s.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2s.h
+usbtest\i2s.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
+usbtest\i2s.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pcd.h
+usbtest\i2s.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_usb.h
+usbtest\i2s.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pcd_ex.h

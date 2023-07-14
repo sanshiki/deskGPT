@@ -1,0 +1,32 @@
+usbtest\gpio.o: ../Core/Src/gpio.c
+usbtest\gpio.o: ../Core/Inc/gpio.h
+usbtest\gpio.o: ../Core/Inc/main.h
+usbtest\gpio.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h
+usbtest\gpio.o: ../Core/Inc/stm32f1xx_hal_conf.h
+usbtest\gpio.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h
+usbtest\gpio.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h
+usbtest\gpio.o: ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h
+usbtest\gpio.o: ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h
+usbtest\gpio.o: ../Drivers/CMSIS/Include/core_cm3.h
+usbtest\gpio.o: D:\Program Files\Keil5\ARM\ARMCC\Bin\..\include\stdint.h
+usbtest\gpio.o: ../Drivers/CMSIS/Include/cmsis_version.h
+usbtest\gpio.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
+usbtest\gpio.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
+usbtest\gpio.o: ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h
+usbtest\gpio.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h
+usbtest\gpio.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
+usbtest\gpio.o: D:\Program Files\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
+usbtest\gpio.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h
+usbtest\gpio.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h
+usbtest\gpio.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h
+usbtest\gpio.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_exti.h
+usbtest\gpio.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h
+usbtest\gpio.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h
+usbtest\gpio.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h
+usbtest\gpio.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h
+usbtest\gpio.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h
+usbtest\gpio.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2s.h
+usbtest\gpio.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
+usbtest\gpio.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pcd.h
+usbtest\gpio.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_usb.h
+usbtest\gpio.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pcd_ex.h

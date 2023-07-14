@@ -1,0 +1,150 @@
+; Softe Audio Converter localization
+; charset=utf-8
+
+
+[Profile]
+Language=Italian
+Translator=Giovanni De Meo
+
+[String]
+&File=&File
+&Edit=&Modifica
+&Help=&Aiuto
+&Tools=&Strumenti
+&View=&Visualizzazione
+About=Informazioni su
+Add Selection=Aggiungi alla Selezione
+Add to CD Burner=Aggiungi per la Masterizzazione
+Album=Album
+Artist=Artista
+Audio File Merger=Unisci File Audio
+Audio File Splitter=Dividi File Audio
+Audio Format Conversion=Tool di Conversione dei Formati Audio
+Automatic=Automatico
+Begin=Inizio
+bit=bit
+Browse=Naviga
+Burn=Masterizza
+Buy Now=Compra
+Cancel=Cancella
+CD Burner=Vista Masterizzazione
+CD Recorder=Masterizzatore
+Close=Chiudi
+Contents=Guida Online
+Continue Trial=Continua la Prova
+Comment=Commento
+Convert=Converti
+Conversion=Conversione
+Copy=Copia
+Copyright=Copyright
+Custom=Personalizzato
+Cut=Taglia
+Date Modified=Data Modifica
+Delete=Cancella
+Deleted=Cancellato
+Delete original files=Cancella i file di origine
+Done=Fatto
+E&xit=Esci
+Eject=Espelli
+Enable volume normalizing=Abilita l'amplificazione del Volume
+End=Fine
+Export File List=Elenco dei file da esportare
+Exported by Softe Audio Converter=Esportazione file creata con Softe Audio Converter
+Extension=Estensione
+Failed=Non riuscita
+Feedback and Support=Linea Diretta e Supporto Tecnico
+File=File
+File Browser=Vista File
+File List=Elenco File
+Find Duplicate Files=Trova File Duplicati
+Folder=Cartella
+Format=Formato
+General=Generale
+Hardware ID=Hardware ID
+Help=Aiuto
+How to Buy=Come Acquistare
+ID3 Tag=ID3 Tag
+Input=Origine
+Length=Durata
+Location=Percorso File
+Loop=Ripeti Sequenza
+Mark Duplicate Files=Evidenzia File Duplicati
+Merge=Unisci
+Minimize to System Tray=Minimizza
+Mono=Mono
+Move=Sposta
+Move down=Sposta verso il basso
+Move to bottom=Sposta alla fine
+Move to top=Sposta all'inizio
+Move up=Sposta verso l'alto
+Name=Nome
+New Folder=Nuova Cartella
+Normalize to=Amplifica Volume al
+OK=OK
+Options=Decodificatore di file RAW (headerless)
+Output=Destinazione
+Paste=Incolla
+Pause=Pausa
+Play=Riproduci
+Quality=Qualità
+Refresh=Aggiorna
+Register=Registrazione
+Registered To=Copia Registrata a
+Registration Code=Codice di registrazione
+Remove=Rimuovi
+Remove All=Rimuovi Tutti
+Rename=Rinomina
+Repeat=Ripeti
+Retain ID3 Tag=Mantieni ID3 Tag
+Search=Cerca
+Select All=Seleziona Tutto
+Selection=Selezione
+Sequence=Sequenza
+Size=Dimensione
+Sound Recorder=Registratore
+Split=Dividi
+Status=Progresso
+Stereo=Stereo
+Stop=Stop
+Task=Operazione
+Title=Titolo
+Trial Version=Versione di Prova
+Type=Formato
+Unregistered=Copia non Registrata
+Year=Anno
+Your Name=Nome
+
+
+Tracks: %s, Total Time: %s=Numero Tracce %s, Durata Totale: %s
+
+
+
+- Converting is limited to 60 seconds.=La Conversione sarà limitata a 60 Secondi.
+- Merging is limited to 30 seconds.=Potrai unire pezzi al massimo di 30 Secondi.
+- Splitting is limited to 60 seconds.=Potrai dividere pezzi fino a 60 Secondi
+
+If you haven't yet paid the registration fee, please click Buy Now to purchase a full version.=Se non hai ancora effettuato il pagamento per registrare la tua Copia, perfavore clicca su Compra ed acquista la versione completa.
+
+On payment approval, the registration code will be sent to you. Please copy and paste Your Name and Registration Code into the field below :=Appena il tuo pagamento sarà approvato, ti verrà inviato via e-Mail il codice di registrazione. Perfavore Copia ed Incolla sia il tuo Nome sia il Codice di registrazione nei campi sottostanti:
+
+Thank you for trying Softe Audio Converter!=Ti ringraziamo per aver provato Softe Audio Converter!
+
+Enjoy the full features without time restrictions, please buy a full version.=Per poter godere di tutte le caratteristiche di Softe Audio Converter senza le restrizioni di tempo, perfavore acquista la versione Completa.
+
+Trial version restrictions=Queste sono le restrizioni a cui è soggetta la versione di Prova:
+
+
+
+;;;;;;;;;;;;;
+;;  translation updates for v1.49 and later versions
+
+Bits per Sample=Risoluzione di Campionamento
+Channels=Canali
+Fastest=Massima
+Home=Home
+Input Format=Formato di Origine
+Max Write Speed=Massima Velocità di Scrittura
+Record=Registra
+Sample Rate=Frequenza di Campionamento
+Tutorials=Guide ed Esempi
+Write Speed=Velocità di Scrittura
