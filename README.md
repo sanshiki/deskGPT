@@ -21,3 +21,10 @@ UI部分使用tkinter，还未完成
 
 
 **待解决的问题**：pcm文件的数据不知道正不正确，经过网上找的pcm播放器放出来全是噪音，无法做进一步的滤波处理。
+
+相关csdn链接：
+example:https://blog.csdn.net/Laura_Luo/article/details/117779052?spm=1001.2014.3001.5506
+usb_cdc:https://blog.csdn.net/zhanglifu3601881/article/details/89441412?spm=1001.2014.3001.5506
+inmp441:https://blog.csdn.net/qq_15181569/article/details/131224833?spm=1001.2014.3001.5506
+vm8978:https://blog.csdn.net/banzhuan133/article/details/78610883/?spm=1001.2014.3001.5506
+i2s:https://blog.csdn.net/Q_Lee/article/details/131217760?spm=1001.2014.3001.5506
