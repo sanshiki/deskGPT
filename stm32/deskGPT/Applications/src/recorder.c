@@ -46,7 +46,7 @@ void recoder_enter_rec_mode(uint16_t agc)
 	//假设d=0,并2倍频,外部晶振为12.288M.那么Fc=(2*12288000)/256*6=16Khz
 	//如果是线性PCM,采样率直接就写采样值 
    	atk_mo1053_write_cmd(SPI_BASS,0x0000);    
- 	atk_mo1053_write_cmd(SPI_AICTRL0,16000);	//设置采样率,设置为16Khz
+ 	atk_mo1053_write_cmd(SPI_AICTRL0,8000);	//设置采样率,设置为16Khz
  	atk_mo1053_write_cmd(SPI_AICTRL1,agc);		//设置增益,0,自动增益.1024相当于1倍,512相当于0.5倍,最大值65535=64倍	
  	atk_mo1053_write_cmd(SPI_AICTRL2,0);		//设置增益最大值,0,代表最大值65536=64X
  	atk_mo1053_write_cmd(SPI_AICTRL3,6);		//左通道(MIC单声道输入)，线性PCM

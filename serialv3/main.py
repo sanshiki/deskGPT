@@ -2,11 +2,13 @@
 # from moudule import tts
 from moudule import usb_cdc
 from moudule import fileIO
+from moudule import sampling
 from time import sleep,time
 
 import wave
 import math
 import threading
+from queue import Queue
 
 APPID = '6267d3f7'
 APISecret = 'ZDRlMDQwMmZjNGJiOTBhYTc5ZWIxY2Ex'
@@ -23,99 +25,14 @@ sample_width = 2  # 采样宽度（字节数）
 sample_rate = 16000  # 采样率
 channels = 1  # 声道数
 
-class samplingData:
-    def __init__(self,datanum) -> None:
-        self.data = []
-        self.datanum = datanum
-        self.mean = 0
-        self.var = 0
-        self.lastdata = 0
-        self.noise_amp_threshold = 2500
-        self.voice_amp_threshold = 8000
-        self.gradient_threshold = 10
-        self.var_threshold = 50000000
+# 缓冲队列
+q = Queue()
 
-        self.sample_full = False
+# usb-cdc
+vid = 0x0483
+pid = 0x5740
 
-        self.noise_sample = []
-        self.temp_noise_sample = []
-        self.noise_sampling_flag = False
-
-        self.no_voice_time = 0
-
-
-    def update(self,newdata):
-        self.data.append(newdata)
-        #更新均值和方差
-        if len(self.data) > self.datanum:
-            self.lastdata = self.data[0]
-            self.data.pop(0)
-            if self.sample_full:
-                self.mean = (self.mean * len(self.data) + newdata - self.lastdata) / len(self.data)
-                self.var = (self.var * len(self.data) + (newdata - self.mean) ** 2 - (self.lastdata - self.mean) ** 2) / len(self.data)
-            else:
-                self.mean = sum(self.data) / len(self.data)
-                self.var = sum([(i - self.mean) ** 2 for i in self.data]) / len(self.data)
-                self.sample_full = True
-            #更新噪声样本
-            self.update_noise_sample(newdata)
-    
-
-    def update_noise_sample(self,newdata):
-        #判断到噪声，开始采集噪声样本
-        if self.is_noise():
-            self.temp_noise_sample.append(newdata)
-
-            #开始计时
-            if self.noise_sampling_flag == False:
-                self.no_voice_time = time()
-
-            self.noise_sampling_flag = True
-        elif self.is_voice():#判断到语音，停止采集噪声样本
-            if self.noise_sampling_flag:
-                self.noise_sampling_flag = False
-                #如果噪声样本长度大于已有的噪声样本，则更新噪声样本
-                if len(self.temp_noise_sample) > len(self.noise_sample):
-                    self.noise_sample = self.temp_noise_sample
-                self.temp_noise_sample = []
-
-    def is_noise(self):
-        if self.mean < self.noise_amp_threshold:
-            return True
-        else:
-            return False
-        
-    def is_voice(self):
-        if abs(self.mean) > self.voice_amp_threshold:
-            return True
-        else:
-            return False
-    
-    def judge_status(self):
-        test_node1 = self.data[0]
-        test_node2 = self.data[int(len(self.data) / 3)]
-        test_node3 = self.data[int(len(self.data) * 2 / 3)]
-        test_node4 = self.data[-1]
-        if self.var > self.var_threshold:
-            if test_node4 - test_node3 > self.gradient_threshold and test_node3 - test_node2 > self.gradient_threshold and test_node2 - test_node1 > self.gradient_threshold:
-                return 'going_up'
-            elif test_node4 - test_node3 < -self.gradient_threshold and test_node3 - test_node2 < -self.gradient_threshold and test_node2 - test_node1 < -self.gradient_threshold:
-                return 'going_down'
-            else:
-                return 'stable'
-        else:
-            return 'stable'
-    
-    def no_voice_for_seconds(self,seconds):
-        if self.noise_sampling_flag:
-            if time() - self.no_voice_time > seconds:
-                return True
-            else:
-                return False
-        else:
-            return False
-
-
+usb = usb_cdc.USB_CDC(vid, pid)
 
 
         
@@ -153,6 +70,21 @@ def byteCheck(byte_data):
 pcm_file = 'audioFile/pcmFile/output.pcm'
 noise_pcm_file = 'audioFile/pcmFile/noise.pcm'
 
+# usb-cdc线程函数
+err_flag = False
+record_flag = True
+def usb_cdc_thread():
+    while record_flag == True:
+        try:
+            raw_data = usb.usb_read_data(200)
+            # print("raw_date in usb_cdc_thread: ", raw_data)
+            if raw_data:
+                q.put(raw_data)
+        except Exception as e:
+            print(e)
+            err_flag = True
+
+
 
 def getDataFromMircophone():
     # 打开文件
@@ -170,108 +102,133 @@ def getDataFromMircophone():
     noise_file.setframerate(sample_rate)
     noise_file.setnchannels(channels)
 
-
     txtFile.open()
     wait_time = 0
     ignore_data_cnt = 0
-    sampling_data = samplingData(100)
+    sampling_data = sampling.samplingData(100)
 
+    #开启usb-cdc线程
+    t = threading.Thread(target=usb_cdc_thread)
+    t.start()
+
+    record_time = 0
 
     while True:
-        try:
-            raw_data = usb.usb_read_data(2)
-        except Exception as e:
-            print(e)
+        size = q.qsize()
+        print("size:",size)
+        print("record_time:",record_time)
+        record_time += 1
+        if record_time >= 10000:
+            record_flag = False
             break
-        if raw_data:
-            if microphone_type == 'inmp441':
-                if sampling_data.no_voice_for_seconds(3):
-                    print("no voice for 3 seconds")
-                    break
-                
-                wait_time = 0
+        if size != 0:
+            raw_data = q.get()
+            if raw_data and err_flag == False:
+                if microphone_type == 'inmp441':
+                    if sampling_data.no_voice_for_seconds(3):
+                        print("no voice for 3 seconds")
+                        break
+                    
+                    wait_time = 0
 
-                byte_data = b''
-                for i in raw_data:
-                    #将i转为byte
-                    byte_data += bytes([i])
+                    byte_data = b''
+                    for i in raw_data:
+                        #将i转为byte
+                        byte_data += bytes([i])
 
-                # inmp441给的数据是24位，stm32为了满足C语言的格式要求，将数据转为32位，所以第一个字节是无效数据，需要去掉
-                byte_data = byte_data[1:]
+                    # inmp441给的数据是24位，stm32为了满足C语言的格式要求，将数据转为32位，所以第一个字节是无效数据，需要去掉
+                    byte_data = byte_data[1:]
 
-                # print("origin byte_data:",byte_data)
+                    # print("origin byte_data:",byte_data)
 
-                #24映射到16
-                byte_data = byte24to16(byte_data)
+                    #24映射到16
+                    byte_data = byte24to16(byte_data)
 
-                #字节反转
-                byte_data = byte_data[::-1]
-                
-                # byte_data = byteCheck(byte_data)
-                dec_data_str = byte2int(byte_data)
+                    #字节反转
+                    byte_data = byte_data[::-1]
+                    
+                    # byte_data = byteCheck(byte_data)
+                    dec_data_str = byte2int(byte_data)
 
-                sampling_data.update(abs(int(dec_data_str)))
-                
-                #将dec_data_str转为16进制字符串
-                hex_data_str = hex(dec_data_str)
-                
+                    sampling_data.update(abs(int(dec_data_str)))
+                    
+                    #将dec_data_str转为16进制字符串
+                    hex_data_str = hex(dec_data_str)
+                    
 
-                print("hex_data_str:",hex_data_str)
-                print("dec_data_str:",dec_data_str)
-                print("byte_data:",byte_data)
+                    print("hex_data_str:",hex_data_str)
+                    print("dec_data_str:",dec_data_str)
+                    print("byte_data:",byte_data)
 
-                # print("mean of data:",sampling_data.mean)
-                # print("var of data:",sampling_data.var)
-                # print("status of data:",sampling_data.judge_status())
-                # print("is voice:",sampling_data.is_voice())
-                # print("is noise:",sampling_data.is_noise())
+                    # print("mean of data:",sampling_data.mean)
+                    # print("var of data:",sampling_data.var)
+                    # print("status of data:",sampling_data.judge_status())
+                    # print("is voice:",sampling_data.is_voice())
+                    # print("is noise:",sampling_data.is_noise())
 
 
-                # # 以16进制打印
-                # print("hex:" + raw_data.hex())
-                # # 以10进制打印，注意符号位为1的转为负数
-                # print("dec:" + str(int.from_bytes(raw_data, byteorder='big', signed=True)))
+                    # # 以16进制打印
+                    # print("hex:" + raw_data.hex())
+                    # # 以10进制打印，注意符号位为1的转为负数
+                    # print("dec:" + str(int.from_bytes(raw_data, byteorder='big', signed=True)))
 
-                if ignore_data_cnt > 10:
-                    # 将音频数据写入PCM文件
-                    output_file.writeframes(byte_data)
-                    output_file.writeframes(byte_data)
-                    #写入txt文件
-                    txtFile.write(str(int(dec_data_str)) + " ")
-                else:
-                    ignore_data_cnt += 1
-            elif microphone_type == 'atk-mo1053':
-                # atk-mo1053
-                byte_data = b''
-                for i in raw_data:
-                    #将i转为byte
-                    byte_data += bytes([i])
+                    if ignore_data_cnt > 10:
+                        # 将音频数据写入PCM文件
+                        output_file.writeframes(byte_data)
+                        output_file.writeframes(byte_data)
+                        #写入txt文件
+                        txtFile.write(str(int(dec_data_str)) + " ")
+                    else:
+                        ignore_data_cnt += 1
+                elif microphone_type == 'atk-mo1053':
+                    # atk-mo1053
+                    byte_data = b''
+                    byte_data_list = []
+                    cnt = 0
+                    for i in raw_data:
+                        #将i转为byte
+                        byte_data += bytes([i])
+                        cnt += 1
+                        if cnt == 2:#每4个字节为一组
+                            byte_data_list.append(byte_data)
+                            byte_data = b''
+                            cnt = 0
 
-                #字节反转
-                # byte_data = byte_data[::-1]
+                    #字节反转
+                    # byte_data = byte_data[::-1]
+                    dec_data_str_list = []
+                    # dec_data_str = byte2int(byte_data)
+                    for byte_data in byte_data_list:
+                        # byte_data = byteCheck(byte_data)
+                        dec_data_str = byte2int(byte_data)
+                        dec_data_str_list.append(dec_data_str)
 
-                dec_data_str = byte2int(byte_data)
+                    hex_data_str_list = []
 
-                #将dec_data_str转为16进制字符串
-                hex_data_str = hex(dec_data_str)
+                    #将dec_data_str转为16进制字符串
+                    # hex_data_str = hex(dec_data_str)
+                    for dec_data_str in dec_data_str_list:
+                        hex_data_str_list.append(hex(dec_data_str))
 
-                print("hex_data_str:",hex_data_str)
-                print("dec_data_str:",dec_data_str)
-                print("byte_data:",byte_data)
+                    for i in range(len(hex_data_str_list)):
+                    #     print("hex_data_str:",hex_data_str_list[i])
+                    #     print("dec_data_str:",dec_data_str_list[i])
+                    #     print("byte_data:",byte_data_list[i])
 
-                if ignore_data_cnt > 10:
-                    # 将音频数据写入PCM文件
-                    output_file.writeframes(byte_data)
-                    output_file.writeframes(byte_data)
-                    #写入txt文件
-                    txtFile.write(str(int(dec_data_str)) + " ")
-                else:
-                    ignore_data_cnt += 1
+                        # 将音频数据写入PCM文件
+                        output_file.writeframes(byte_data_list[i])
+                        output_file.writeframes(byte_data_list[i])
+                        #写入txt文件
+                        txtFile.write(str(int(dec_data_str_list[i])) + " ")
 
             else: #wait
                 wait_time += 1
                 if wait_time > 50000:
+                    print("wait too long")
                     break
+        else:
+            # print("queue is empty")
+            pass
 
     usb.usb_close()
     # 关闭PCM文件
@@ -284,11 +241,6 @@ def getDataFromMircophone():
         noise_file.writeframes(int2byte(i))
     noise_file.close()
 
-
-vid = 0x0483
-pid = 0x5740
-
-usb = usb_cdc.USB_CDC(vid, pid)
 
 
 if __name__ == '__main__':

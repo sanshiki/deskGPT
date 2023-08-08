@@ -139,10 +139,12 @@ atk_mo1053_reset();
   uint16_t cur_mode = atk_mo1053_read_reg(SPI_MODE);
   uint16_t cur_state = atk_mo1053_read_reg(SPI_HDAT1);
   uint16_t cur_data = atk_mo1053_read_reg(SPI_HDAT0);
+  uint16_t send_buf[100];
 //   atk_mo1053_write_cmd(SPI_MODE, cur_mode | SM_RESET | SM_ADPCM | SM_LINE_IN);
 // atk_mo1053_write_cmd(SPI_MODE,0x1804);
 delay_ms(10);
 uint16_t cnt = 0;
+uint16_t idx = 0;
   while (1)
   {
     /* USER CODE END WHILE */
@@ -153,12 +155,19 @@ uint16_t cnt = 0;
         uint16_t data = atk_mo1053_read_reg(SPI_HDAT0);
         // cur_data = data;
         cnt++;
+        // send_buf[idx++] = cnt;
+        send_buf[idx++] = data;
         // CDC_Transmit_FS((uint8_t*)&data,2);
-        // if(cnt % 20 == 0)
+        // if(cnt % 100 == 0)
         // {
         //     CDC_Transmit_FS((uint8_t*)&cnt,2);
         // }
-        CDC_Transmit_FS((uint8_t*)&cnt,2);
+        // CDC_Transmit_FS((uint8_t*)&cnt,2);
+        if(idx == 100)
+        {
+            CDC_Transmit_FS((uint8_t*)send_buf,200);
+            idx = 0;
+        }
     }
     // unsigned char str1[] = "\nstate: ";
     // unsigned char str2[] = "\ndata: ";

@@ -33,7 +33,7 @@ output_audio = filter.wavelet_transform(audio, wavelet, level)
 # output_audio = lms_adaptive_filter(audio, noise_audio, 100, 0.01, len(audio))
 
 
-output_audio = filter.spectral_subtraction(output_audio, noise_audio, 1)
+# output_audio = filter.spectral_subtraction(output_audio, noise_audio, 1)
 
 
 sf.write(filtered_wav_file, output_audio, sr)
