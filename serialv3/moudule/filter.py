@@ -27,7 +27,7 @@ import numpy as np
 import soundfile as sf
 import matplotlib.pyplot as plt
 
-def bondpass_filter(audio, sr, low_cutoff_freq, high_cutoff_freq, filter_order):
+def bandpass_filter(audio, sr, low_cutoff_freq, high_cutoff_freq, filter_order):
     nyquist_freq = 0.5 * sr  # 奈奎斯特频率
     filter_coef = firwin(filter_order, [low_cutoff_freq/nyquist_freq, high_cutoff_freq/nyquist_freq], pass_zero=False)
     filtered_audio = lfilter(filter_coef, 1.0, audio)

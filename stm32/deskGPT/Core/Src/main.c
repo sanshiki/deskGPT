@@ -30,6 +30,7 @@
 #include "delay.h"
 #include <string.h>
 #include "recorder.h"
+#include "usbd_cdc_if.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -145,6 +146,7 @@ atk_mo1053_reset();
 delay_ms(10);
 uint16_t cnt = 0;
 uint16_t idx = 0;
+uint8_t flag = 0;
   while (1)
   {
     /* USER CODE END WHILE */
@@ -157,10 +159,12 @@ uint16_t idx = 0;
         cnt++;
         // send_buf[idx++] = cnt;
         send_buf[idx++] = data;
+        // send_buf[idx++] = 0;
         // CDC_Transmit_FS((uint8_t*)&data,2);
         // if(cnt % 100 == 0)
         // {
-        //     CDC_Transmit_FS((uint8_t*)&cnt,2);
+        //     uint16_t send_data = 0;
+        //     CDC_Transmit_FS((uint8_t*)&send_data,2);
         // }
         // CDC_Transmit_FS((uint8_t*)&cnt,2);
         if(idx == 100)

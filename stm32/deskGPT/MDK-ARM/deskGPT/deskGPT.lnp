@@ -39,7 +39,6 @@
 "deskgpt\usbd_cdc.o"
 "deskgpt\atk_mo1053.o"
 "deskgpt\vs_spi.o"
-"deskgpt\vs10xx_1.o"
 "deskgpt\delay.o"
 "deskgpt\recorder.o"
 --strict --scatter "deskGPT\deskGPT.sct"

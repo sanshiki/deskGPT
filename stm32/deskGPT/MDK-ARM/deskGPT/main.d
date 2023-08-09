@@ -49,3 +49,9 @@ deskgpt\main.o: ../Drivers/CMSIS/Include/core_cm4.h
 deskgpt\main.o: ../Applications/inc/delay.h
 deskgpt\main.o: ../Applications/inc/recorder.h
 deskgpt\main.o: ../Drivers/CMSIS/Include/core_cm4.h
+deskgpt\main.o: ../USB_DEVICE/App/usbd_cdc_if.h
+deskgpt\main.o: ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h
+deskgpt\main.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h
+deskgpt\main.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h
+deskgpt\main.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h
+deskgpt\main.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h

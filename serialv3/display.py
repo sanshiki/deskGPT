@@ -36,7 +36,9 @@ def draw(data):
     #横坐标
     fft_result = np.fft.fft(data)
 
-    freq_axis = np.fft.fftfreq(len(data), t[1] - t[0]) / 2.2
+    freq_axis = np.fft.fftfreq(len(data), t[1] - t[0]) / 2
+    # freq_axis = np.linspace(0, max(freq_axis1), len(fft_result))
+    # freq_axis = np.linspace(0, len(fft_result), len(fft_result))
 
     #分别绘制
     plt.subplot(211)

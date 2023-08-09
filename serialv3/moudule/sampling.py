@@ -1,4 +1,5 @@
 from time import time
+import numpy as np
 
 class samplingData:
     def __init__(self,datanum) -> None:
@@ -7,10 +8,10 @@ class samplingData:
         self.mean = 0
         self.var = 0
         self.lastdata = 0
-        self.noise_amp_threshold = 2500
-        self.voice_amp_threshold = 8000
-        self.gradient_threshold = 10
-        self.var_threshold = 50000000
+        self.noise_amp_threshold = 2500     #inmp:2500
+        self.voice_amp_threshold = 8000    #inmp:8000
+        self.gradient_threshold = 10    #inmp:10
+        self.var_threshold = 50000000   #inmp:50000000
 
         self.sample_full = False
 
@@ -91,3 +92,103 @@ class samplingData:
                 return False
         else:
             return False
+        
+    
+class samplingDatav2:
+    def __init__(self, packnum, packlen) -> None:
+        self.data = []
+        self.packnum = packnum
+        self.packlen = packlen
+
+        # self.noise_amp_threshold = 3200     #inmp:2500
+        self.voice_amp_threshold = 50000    #inmp:8000
+
+        # self.noise_count = 0
+        self.voice_count = 0
+        self.is_voice = False
+
+        self.sample_cnt = 0
+
+
+
+    def update(self,new_data_pack):
+        self.data += new_data_pack
+        self.sample_cnt += 1
+
+        # #判断新的数据包中有多少个数据点超过了人声阈值
+        # self.voice_count = 0
+        # for i in new_data_pack:
+        #     # print(i)
+        #     if abs(i) > self.voice_amp_threshold:
+        #         self.voice_count += 1
+        
+        # #判断是否有人声
+        # if self.voice_count > self.packlen * 0.4:
+        #     self.is_voice = True
+        # else:
+        #     self.is_voice = False
+        # try:
+        #     new_data_fft = np.fft.fft(new_data_pack)
+
+        #     #判断在频率100~1000Hz之间有多少个数据点超过了人声阈值
+        #     self.voice_count = 0
+        #     for i in range(100,1000):
+        #         if abs(new_data_fft[i]) > self.voice_amp_threshold:
+        #             self.voice_count += 1
+        #     print("voice_count:",self.voice_count)
+        #     #判断是否有人声
+        #     if self.voice_count > self.packlen * 0.4:
+        #         self.is_voice = True
+        #     else:
+        #         self.is_voice = False
+        # except Exception as e:
+        #     pass
+        
+        if len(self.data) / self.packlen > self.packnum:
+            self.data = self.data[self.packlen:]
+        
+        if self.sample_cnt == self.packnum / 10:
+            self.sample_cnt = 0
+            self.check_voice()
+
+    
+    def check_voice(self):
+        data_fft = np.fft.fft(self.data)
+
+        #将0~10部分置0
+        for i in range(0,10):
+            data_fft[i] = 0
+        
+        #将后半部分置0
+        for i in range(int(len(data_fft) / 2),len(data_fft)):
+            data_fft[i] = 0
+
+        # 获取定义域
+        freq_axis = np.fft.fftfreq(len(self.data), 1 / 16000) / 2
+
+        max_freq = max(freq_axis)
+
+        # 将频率转换为索引
+        def freq2index(freq):
+            return int(freq / max_freq * len(data_fft))
+        
+        # 判断在频率100~1000Hz之间有多少个数据点超过了人声阈值
+        self.voice_count = 0
+        for i in range(freq2index(100), freq2index(1500)):
+            if abs(data_fft[i]) > self.voice_amp_threshold:
+                self.voice_count += 1
+        voice_count_percentage = self.voice_count / self.packlen / self.packnum * 2
+        #保留两位小数
+        # print("voice_count_percentage:",round(voice_count_percentage,2))
+        # print("len of data:", len(data_fft))
+        # print("100Hz:", freq2index(100))
+        # print("1000Hz:", freq2index(1000))
+        # print("max:",max(data_fft))
+        # print("index of max:",np.argmax(data_fft))
+        # 判断是否有人声
+        if voice_count_percentage > 0.28:#待测
+            self.is_voice = True
+        else:
+            self.is_voice = False
+
+        # print("is_voice:",self.is_voice)

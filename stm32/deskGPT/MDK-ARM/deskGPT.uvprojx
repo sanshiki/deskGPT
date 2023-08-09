@@ -716,11 +716,6 @@
               <FilePath>..\Applications\src\vs_spi.c</FilePath>
             </File>
             <File>
-              <FileName>vs10xx_1.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Applications\src\vs10xx_1.c</FilePath>
-            </File>
-            <File>
               <FileName>delay.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Applications\src\delay.c</FilePath>

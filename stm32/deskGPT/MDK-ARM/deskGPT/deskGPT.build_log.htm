@@ -22,23 +22,26 @@ Dialog DLL:      TCM.DLL V1.32.0.0
  
 <h2>Project:</h2>
 D:\Program Files (x86)\My code\deskGPT\stm32\deskGPT\MDK-ARM\deskGPT.uvprojx
-Project File Date:  08/05/2023
+Project File Date:  08/09/2023
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'D:\Program Files\Keil5\ARM\ARMCC\Bin'
 Build target 'deskGPT'
-compiling recorder.c...
+compiling main.c...
 ../Applications/inc/delay.h(9): warning:  #1-D: last line of file ends without a newline
   #endif // __DELAY_H__
 ../Applications/inc/recorder.h(61): warning:  #1-D: last line of file ends without a newline
   #endif // __RECORDER_H__
-..\Applications\src\recorder.c(98): warning:  #1-D: last line of file ends without a newline
-  // }
-..\Applications\src\recorder.c: 3 warnings, 0 errors
+../Core/Src/main.c(155): warning:  #1293-D: assignment in condition
+      if(cur_state = atk_mo1053_read_reg(
+PI_HDAT1))
+../Core/Src/main.c(149): warning:  #177-D: variable "flag"  was declared but never referenced
+  uint8_t flag = 0;
+../Core/Src/main.c: 4 warnings, 0 errors
 linking...
 Program Size: Code=18634 RO-data=530 RW-data=272 ZI-data=16760  
 FromELF: creating hex file...
-"deskGPT\deskGPT.axf" - 0 Error(s), 3 Warning(s).
+"deskGPT\deskGPT.axf" - 0 Error(s), 4 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -61,7 +64,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.6.0
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>
