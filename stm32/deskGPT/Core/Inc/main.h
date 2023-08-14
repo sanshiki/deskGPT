@@ -61,8 +61,6 @@ void Error_Handler(void);
 #define VS10XX_DQ_GPIO_Port GPIOF
 #define VS10XX_RST_Pin GPIO_PIN_0
 #define VS10XX_RST_GPIO_Port GPIOC
-#define I2S2_SD_Pin GPIO_PIN_3
-#define I2S2_SD_GPIO_Port GPIOC
 #define SPI1_SCK_Pin GPIO_PIN_5
 #define SPI1_SCK_GPIO_Port GPIOA
 #define SPI1_SO_Pin GPIO_PIN_6
@@ -73,8 +71,6 @@ void Error_Handler(void);
 #define VS10XX_XCS_GPIO_Port GPIOB
 #define VS10XX_XDCS_Pin GPIO_PIN_11
 #define VS10XX_XDCS_GPIO_Port GPIOB
-#define I2S2_WS_Pin GPIO_PIN_12
-#define I2S2_WS_GPIO_Port GPIOB
 #define I2S2_CK_Pin GPIO_PIN_13
 #define I2S2_CK_GPIO_Port GPIOB
 

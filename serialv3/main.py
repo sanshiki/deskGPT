@@ -4,6 +4,7 @@ from moudule import usb_cdc
 from moudule import fileIO
 from moudule import sampling
 from moudule import bytetools
+from moudule import datapack
 from time import sleep,time
 
 import wave
@@ -35,7 +36,8 @@ pid = 0x5740
 
 usb = usb_cdc.USB_CDC(vid, pid)
 
-
+# 数据包
+pcDataPack = datapack.dataPack()
     
 pcm_file = 'audioFile/pcmFile/output.pcm'
 noise_pcm_file = 'audioFile/pcmFile/noise.pcm'
@@ -50,13 +52,15 @@ def usb_cdc_thread():
     usb.usb_open()
     while record_flag == True and err_flag == False:
         try:
-            raw_data = usb.usb_read_data(200)
+            usb.usb_send_data(pcDataPack.bin) # 发送数据包
+            raw_data = usb.usb_read_data(200) # 读取数据
             if raw_data:
                 q.put(raw_data)
+
         except Exception as e:
             print(e)
             err_flag = True
-            break
+
     usb.usb_close()
 
 
@@ -220,7 +224,7 @@ def getDataFromMircophone():
 
                                 byte_data = b''
                         # 样本更新
-                        # sampling_datav2.update(dec_data_list)
+                        sampling_datav2.update(dec_data_list)
                     except Exception as e:
                         print(e)
                         err_flag = True

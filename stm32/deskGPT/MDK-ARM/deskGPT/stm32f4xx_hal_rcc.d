@@ -25,8 +25,6 @@ deskgpt\stm32f4xx_hal_rcc.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_c
 deskgpt\stm32f4xx_hal_rcc.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h
 deskgpt\stm32f4xx_hal_rcc.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h
 deskgpt\stm32f4xx_hal_rcc.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h
-deskgpt\stm32f4xx_hal_rcc.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2s.h
-deskgpt\stm32f4xx_hal_rcc.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2s_ex.h
 deskgpt\stm32f4xx_hal_rcc.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 deskgpt\stm32f4xx_hal_rcc.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 deskgpt\stm32f4xx_hal_rcc.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h

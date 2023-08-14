@@ -1,3 +1,5 @@
+from moudule import bytetools
+
 str1 = "fffffc3e"
 str2 = "-ffffc3e"
 
@@ -12,7 +14,9 @@ def byte2int(byte_data):
     # return int.from_bytes(byte_data, byteorder='big', signed=True)  # 大端模式，有符号数
     return int.from_bytes(byte_data, byteorder='little', signed=True) # 小端模式，有符号数
 
-print(byte2int(b1))
+# print(byte2int(b1))
+
+# print((bytetools.setbit(b'\x00',7,1)))
 
 # #取b1的反码
 # b2 = b''
@@ -21,3 +25,10 @@ print(byte2int(b1))
 
 # print(b1)
 # print(b2)
+
+# print(bytetools.setbyte(b1,1,b'\x00'))
+
+b_arr = bytearray(b1)
+print(b_arr)
+b_arr[0] = 255
+print(b_arr)

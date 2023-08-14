@@ -32,8 +32,6 @@ deskgpt\usbd_ctlreq.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.
 deskgpt\usbd_ctlreq.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h
 deskgpt\usbd_ctlreq.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h
 deskgpt\usbd_ctlreq.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h
-deskgpt\usbd_ctlreq.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2s.h
-deskgpt\usbd_ctlreq.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2s_ex.h
 deskgpt\usbd_ctlreq.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 deskgpt\usbd_ctlreq.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 deskgpt\usbd_ctlreq.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h

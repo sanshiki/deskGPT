@@ -22,7 +22,7 @@
 #include "usbd_cdc_if.h"
 
 /* USER CODE BEGIN INCLUDE */
-
+#include "dataQueue.h"
 /* USER CODE END INCLUDE */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -258,6 +258,7 @@ static int8_t CDC_Control_FS(uint8_t cmd, uint8_t* pbuf, uint16_t length)
   * @param  Len: Number of data received (in bytes)
   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
   */
+ extern uint8_t flg;
 static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
 {
   /* USER CODE BEGIN 6 */
@@ -265,7 +266,10 @@ static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
   USBD_CDC_ReceivePacket(&hUsbDeviceFS);
 
     //   resend the data
-    CDC_Transmit_FS(Buf, *Len);
+    // CDC_Transmit_FS(Buf, *Len);
+    pcDataQueuePush(Buf, *Len);
+    flg = 1;
+
   return (USBD_OK);
   /* USER CODE END 6 */
 }

@@ -28,3 +28,30 @@ def byteCheck(byte_data):
         return origin_data
     else:
         return byte_data
+    
+
+#修改字节中的指定位
+def setbit(byte, bit, value=1):
+    if type(byte) == str:
+        byte = int(byte, 16)
+    elif type(byte) == bytes:
+        byte = int.from_bytes(byte, byteorder='big', signed=False)
+
+    result = 0
+    
+    if value == 0:
+        result = byte & ~(1 << bit)
+    else:
+        result = byte | (1 << bit)
+
+    return result.to_bytes(1, byteorder='big', signed=False)
+
+#修改字节
+def setbyte(byte, idx, value):
+    bytearr = bytearray(byte)
+    if type(value) == str:
+        value = int(value, 16)
+    elif type(value) == bytes:
+        value = int.from_bytes(value, byteorder='big', signed=False)
+    bytearr[idx] = value
+    return bytes(bytearr)

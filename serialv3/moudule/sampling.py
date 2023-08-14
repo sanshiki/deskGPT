@@ -179,7 +179,7 @@ class samplingDatav2:
                 self.voice_count += 1
         voice_count_percentage = self.voice_count / self.packlen / self.packnum * 2
         #保留两位小数
-        # print("voice_count_percentage:",round(voice_count_percentage,2))
+        print("voice_count_percentage:",round(voice_count_percentage,2))
         # print("len of data:", len(data_fft))
         # print("100Hz:", freq2index(100))
         # print("1000Hz:", freq2index(1000))

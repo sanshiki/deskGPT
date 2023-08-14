@@ -26,16 +26,12 @@ deskgpt\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h
 deskgpt\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h
 deskgpt\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h
 deskgpt\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h
-deskgpt\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2s.h
-deskgpt\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2s_ex.h
 deskgpt\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 deskgpt\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 deskgpt\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 deskgpt\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h
 deskgpt\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h
 deskgpt\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h
-deskgpt\main.o: ../Core/Inc/dma.h
-deskgpt\main.o: ../Core/Inc/i2s.h
 deskgpt\main.o: ../Core/Inc/spi.h
 deskgpt\main.o: ../USB_DEVICE/App/usb_device.h
 deskgpt\main.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h
@@ -48,6 +44,10 @@ deskgpt\main.o: ../Applications/inc/atk_mo1053.h
 deskgpt\main.o: ../Drivers/CMSIS/Include/core_cm4.h
 deskgpt\main.o: ../Applications/inc/delay.h
 deskgpt\main.o: ../Applications/inc/recorder.h
+deskgpt\main.o: ../Drivers/CMSIS/Include/core_cm4.h
+deskgpt\main.o: ../Applications/inc/dataPackDecode.h
+deskgpt\main.o: ../Drivers/CMSIS/Include/core_cm4.h
+deskgpt\main.o: ../Applications/inc/dataQueue.h
 deskgpt\main.o: ../Drivers/CMSIS/Include/core_cm4.h
 deskgpt\main.o: ../USB_DEVICE/App/usbd_cdc_if.h
 deskgpt\main.o: ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h
