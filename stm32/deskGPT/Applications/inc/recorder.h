@@ -8,6 +8,12 @@
 #include "delay.h"
 #include "atk_mo1053.h"
 
+enum recorder_state{
+    RECORD_MODE,
+    PLAY_MODE,
+    STOP_MODE
+};
+
  //RIFF块
 typedef __packed struct
 {

@@ -23,6 +23,8 @@ deskgpt\datapackdecode.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti
 deskgpt\datapackdecode.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h
 deskgpt\datapackdecode.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h
 deskgpt\datapackdecode.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h
+deskgpt\datapackdecode.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dac.h
+deskgpt\datapackdecode.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dac_ex.h
 deskgpt\datapackdecode.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h
 deskgpt\datapackdecode.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h
 deskgpt\datapackdecode.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h
@@ -37,3 +39,4 @@ deskgpt\datapackdecode.o: ../Core/Inc/main.h
 deskgpt\datapackdecode.o: ../Applications/inc/delay.h
 deskgpt\datapackdecode.o: ../Applications/inc/dataQueue.h
 deskgpt\datapackdecode.o: ../Drivers/CMSIS/Include/core_cm4.h
+deskgpt\datapackdecode.o: D:\Program Files\Keil5\ARM\ARMCC\Bin\..\include\string.h

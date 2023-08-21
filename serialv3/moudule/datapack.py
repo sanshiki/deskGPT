@@ -11,7 +11,8 @@ from moudule import bytetools
         6.开启/关闭录音
         5.开启/关闭播放
         4.开启/关闭漏数据测试
-        3-0.保留
+        3.音频已经发送完毕
+        2-0.保留
 
 
 """
@@ -23,12 +24,14 @@ class dataPack:
         if head != None:
             self.head = head
 
-        self.length = 128 #数据包固定长度为128字节，1024bit
+        self.length = 550
+        self.audioDataLength = 512
 
         self.spi_enable = True
         self.record_enable = True
         self.play_enable = False
         self.lost_data_test_enable = False
+        self.play_commplete = False
 
         #数据包头部
         for i in range(0, len(self.head)):
@@ -53,4 +56,13 @@ class dataPack:
             spi_ctrl = bytetools.setbit(spi_ctrl,5)
         if self.lost_data_test_enable:
             spi_ctrl = bytetools.setbit(spi_ctrl,4)
+        if self.play_commplete:
+            spi_ctrl = bytetools.setbit(spi_ctrl,3)
         self.bin = bytetools.setbyte(self.bin,len(self.head),spi_ctrl)        
+    
+    def addAudioData(self,audioData):
+        #音频数据部分
+        # for i in range(0, len(audioData)):
+        #     self.bin += bytes([audioData[i]])
+
+        self.bin = bytetools.setbytes(self.bin,len(self.head) + 1,audioData)

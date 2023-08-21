@@ -55,3 +55,9 @@ def setbyte(byte, idx, value):
         value = int.from_bytes(value, byteorder='big', signed=False)
     bytearr[idx] = value
     return bytes(bytearr)
+
+def setbytes(byte, idx, value):
+    bytearr = bytearray(byte)
+    for i in range(0, len(value)):
+        bytearr[idx + i] = value[i]
+    return bytes(bytearr)

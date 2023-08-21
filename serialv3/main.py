@@ -41,6 +41,8 @@ pcDataPack = datapack.dataPack()
     
 pcm_file = 'audioFile/pcmFile/output.pcm'
 noise_pcm_file = 'audioFile/pcmFile/noise.pcm'
+play_pcm_file = 'audioFile/pcmFile/demo.pcm'
+play_wav_file = 'audioFile/wavFile/demo.wav'
 
 # usb-cdc线程函数
 err_flag = False
@@ -252,6 +254,76 @@ def getDataFromMircophone():
         noise_file.close()
 
 
+def usb_cdc_speaker_thread():
+    while True:
+        usb.usb_send_data(pcDataPack.bin)
+        raw_data = usb.usb_read_data(550) # 读取数据
+        print("bin:")
+        print(pcDataPack.bin)
+        print("raw_data:")
+        print(bytes(raw_data))
+        print("len of raw_aata:",len(raw_data))
+        print(len(raw_data))
+
+
+def sendDataToSpeaker():
+
+    # audioFile = open(play_pcm_file,'rb')
+    audioFile = open(play_wav_file,'rb')
+
+    txtFile = fileIO.txtFileManager("wave_data.txt")
+    txtFile.open()
+
+    pcDataPack.spi_enable = True
+    pcDataPack.record_enable = False
+    pcDataPack.play_enable = True
+    pcDataPack.lost_data_test_enable = False
+    pcDataPack.play_commplete = False
+    pcDataPack.update()
+    
+    # t = threading.Thread(target=usb_cdc_speaker_thread)
+    # t.start()
+
+    cnt = 0
+    send_buffer = b''
+    send_time = time()
+    while audioFile.readable():
+        int8_data = audioFile.read(1)
+        cnt += 1
+        
+        if int8_data:
+            if cnt % 2 == 1:
+                high_byte = int8_data
+            elif cnt % 2 == 0:
+                low_byte = int8_data
+                int16_data = high_byte + low_byte
+                send_buffer += int16_data
+                # print(int16_data)
+                txtFile.write(str(bytetools.byte2int(int16_data)) + " ")
+
+                if cnt == pcDataPack.audioDataLength:
+                    pcDataPack.addAudioData(send_buffer)
+                    usb.usb_send_data(pcDataPack.bin)
+                    # raw_data = usb.usb_read_data(550) # 读取数据
+                    # print("bin:")
+                    # print(pcDataPack.bin)
+                    # print("raw_data:")
+                    # print(bytes(raw_data))
+                    # print("len of raw_aata:",len(raw_data))
+                    # print(len(raw_data))
+                    sleep(0.013) #0.015
+                    send_buffer = b''
+                    cnt = 0
+                    # print(data)
+        else:
+            break
+    #音频发送终止，发送结束标志
+    pcDataPack.play_commplete = True
+    pcDataPack.update()
+    usb.usb_send_data(pcDataPack.bin)
+
+    txtFile.close()
 
 if __name__ == '__main__':
-    getDataFromMircophone()
+    # getDataFromMircophone()
+    sendDataToSpeaker()

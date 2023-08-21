@@ -28,7 +28,13 @@ def byte2int(byte_data):
 
 # print(bytetools.setbyte(b1,1,b'\x00'))
 
-b_arr = bytearray(b1)
-print(b_arr)
-b_arr[0] = 255
-print(b_arr)
+# b_arr = bytearray(b1)
+# print(b_arr)
+# b_arr[0] = 255
+# print(b_arr)
+
+b1 = b'\x00\x00\x00\x80'
+b2 = b'\xff\x80'
+
+b3 = bytetools.setbytes(b1,0,b2)
+print(b3)

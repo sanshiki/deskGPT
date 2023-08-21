@@ -258,7 +258,6 @@ static int8_t CDC_Control_FS(uint8_t cmd, uint8_t* pbuf, uint16_t length)
   * @param  Len: Number of data received (in bytes)
   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
   */
- extern uint8_t flg;
 static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
 {
   /* USER CODE BEGIN 6 */
@@ -267,8 +266,23 @@ static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
 
     //   resend the data
     // CDC_Transmit_FS(Buf, *Len);
-    pcDataQueuePush(Buf, *Len);
-    flg = 1;
+    static uint32_t total_length = 0;
+    static uint8_t cnt = 0;
+    static uint8_t recv_buf[DATA_SIZE];
+
+    if(total_length >= DATA_SIZE-1)
+    {
+        // CDC_Transmit_FS(recv_buf, DATA_SIZE);
+        total_length = 0;
+        pcDataQueuePush(recv_buf, DATA_SIZE);
+        memset(recv_buf, 0, DATA_SIZE);
+    }
+    memcpy(recv_buf + total_length, Buf, *Len);
+    total_length += *Len;
+    cnt++;
+    // if(total_length == 64) CDC_Transmit_FS((uint8_t *)&total_length, 4);
+    // CDC_Transmit_FS((uint8_t *)&total_length, 4);
+    // CDC_Transmit_FS(&cnt, 1);
 
   return (USBD_OK);
   /* USER CODE END 6 */

@@ -22,17 +22,19 @@ Dialog DLL:      TCM.DLL V1.32.0.0
  
 <h2>Project:</h2>
 D:\Program Files (x86)\My code\deskGPT\stm32\deskGPT\MDK-ARM\deskGPT.uvprojx
-Project File Date:  08/11/2023
+Project File Date:  08/20/2023
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'D:\Program Files\Keil5\ARM\ARMCC\Bin'
 Build target 'deskGPT'
-compiling usbd_cdc_if.c...
 compiling main.c...
+../Core/Src/main.c(88): warning:  #940-D: missing return statement at end of non-void function "CDC_Transmit_One_Byte" 
+  }
+../Core/Src/main.c: 1 warning, 0 errors
 linking...
-Program Size: Code=16190 RO-data=522 RW-data=268 ZI-data=18340  
+Program Size: Code=17698 RO-data=522 RW-data=288 ZI-data=87624  
 FromELF: creating hex file...
-"deskGPT\deskGPT.axf" - 0 Error(s), 0 Warning(s).
+"deskGPT\deskGPT.axf" - 0 Error(s), 1 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -55,7 +57,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.6.0
-Build Time Elapsed:  00:00:03
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>
