@@ -27,14 +27,18 @@ Project File Date:  08/20/2023
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'D:\Program Files\Keil5\ARM\ARMCC\Bin'
 Build target 'deskGPT'
+compiling dataPackDecode.c...
+..\Applications\src\dataPackDecode.c(57): warning:  #1-D: last line of file ends without a newline
+  }
+..\Applications\src\dataPackDecode.c: 1 warning, 0 errors
 compiling main.c...
 ../Core/Src/main.c(88): warning:  #940-D: missing return statement at end of non-void function "CDC_Transmit_One_Byte" 
   }
 ../Core/Src/main.c: 1 warning, 0 errors
 linking...
-Program Size: Code=17698 RO-data=522 RW-data=288 ZI-data=87624  
+Program Size: Code=17650 RO-data=522 RW-data=288 ZI-data=87624  
 FromELF: creating hex file...
-"deskGPT\deskGPT.axf" - 0 Error(s), 1 Warning(s).
+"deskGPT\deskGPT.axf" - 0 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -57,7 +61,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.6.0
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

@@ -154,8 +154,6 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
     atk_mo1053_init();
-    //   uint8_t res;
-    // delay_ms(10);
     uint16_t cnt = 0;
     uint16_t idx = 0;
     while (1)
@@ -165,7 +163,7 @@ int main(void)
     /* USER CODE BEGIN 3 */
 
         /* get audio data from spi and send to usb */
-        if (pcDataPack.record_enable && !pcDataPack.play_enable)
+        if (pcDataPack.record_enable && !pcDataPack.play_enable)    //录音
         {
             if(rec_state != RECORD_MODE)
             {
@@ -189,7 +187,7 @@ int main(void)
                 }
             }
         }
-        else if (!pcDataPack.record_enable && pcDataPack.play_enable)
+        else if (!pcDataPack.record_enable && pcDataPack.play_enable)   //播放
         {
             if(rec_state != PLAY_MODE)
             {
@@ -197,128 +195,30 @@ int main(void)
                 atk_mo1053_soft_reset();
                 atk_mo1053_restart_play();
                 atk_mo1053_set_all();
-                // atk_mo1053_write_cmd(SPI_AICTRL0,16000);	//设置采样率,设置为16Khz
                 atk_mo1053_reset_decode_time();
                 atk_mo1053_spi_speed_high();
-                // atk_mo1053_sine_test();
-
-                // atk_mo1053_write_cmd(SPI_BASS,0x0000);    
                 atk_mo1053_write_cmd(SPI_AICTRL0,8000);	//设置采样率,设置为16Khz
-                // // atk_mo1053_write_cmd(SPI_AICTRL1,0);		//设置增益,0,自动增益.1024相当于1倍,512相当于0.5倍,最大值65535=64倍	
-                // // atk_mo1053_write_cmd(SPI_AICTRL2,0);		//设置增益最大值,0,代表最大值65536=64X
-                // // atk_mo1053_write_cmd(SPI_AICTRL3,6);		//左通道(MIC单声道输入)，线性PCM
-                atk_mo1053_write_cmd(SPI_CLOCKF,0X2000);	//设置VS10XX的时钟,MULT:2倍频;ADD:不允许;CLK:12.288Mhz
-                // atk_mo1053_write_cmd(SPI_MODE,0x0804);		
+                atk_mo1053_write_cmd(SPI_CLOCKF,0X2000);	//设置VS10XX的时钟,MULT:2倍频;ADD:不允许;CLK:12.288Mhz	
                 rec_state = PLAY_MODE;
                 delay_ms(10);
             }
-            if(pcDataPack.play_complete == 0)
+            
+            getAudioData(audio_buf, recv_buf, &pcDataPack);
+            for(int i=0;i<AUDIO_DATA_BUF_SIZE;i+=AUDIO_DATA_SIZE)
             {
-                getAudioData(audio_buf, recv_buf, &pcDataPack);
-                // CDC_Transmit_FS(audio_buf, AUDIO_DATA_BUF_SIZE);
-                // for(int i=0;i<AUDIO_DATA_BUF_SIZE;i+=2)
-                // {
-                //     uint16_t audio_data = (uint16_t)audio_buf[i]<<8 | (uint16_t)audio_buf[i+1];
-                //     CDC_Transmit_One_Byte(audio_data);
-                //     if(i % AUDIO_DATA_SIZE == 0)
-                //     {
-                //         atk_mo1053_send_music_data(audio_buf+i);
-                //     }
-                // }
-                for(int i=0;i<AUDIO_DATA_BUF_SIZE;i+=AUDIO_DATA_SIZE)
+                uint16_t timeout_cnt = 0;
+                //防止发送失败，导致程序卡死
+                while(atk_mo1053_send_music_data(audio_buf+i))
                 {
-                    // audioDataQueuePush8(audio_buf+i);
-                    uint16_t timeout_cnt = 0;
-                    //防止发送失败，导致程序卡死
-                    while(atk_mo1053_send_music_data(audio_buf+i))
+                    timeout_cnt++;
+                    if(timeout_cnt > 10000)
                     {
-                        timeout_cnt++;
-                        if(timeout_cnt > 10000)
-                        {
-                            break;
-                        }
+                        break;
                     }
-                    
-                    // //判斷數據是否全0
-                    // uint8_t is_all_zero = 1;
-                    // for(int j=0;j<AUDIO_DATA_SIZE;j++)
-                    // {
-                    //     uint16_t timeout_cnt = 0;
-                    //     //如果不是全0数据，就发送
-                    //     if(audio_buf[i+j] != 0)
-                    //     {
-                    //         is_all_zero = 0;
-                    //         //防止发送失败，导致程序卡死
-                    //         while(atk_mo1053_send_music_data(audio_buf+i))
-                    //         {
-                    //             timeout_cnt++;
-                    //             if(timeout_cnt > 10000)
-                    //             {
-                    //                 break;
-                    //             }
-                    //         }
-                    //         timeout_cnt = 0;
-                    //         break;
-                    //     }
-                    // }
-                    // // 数据全0，终止播放
-                    // if(is_all_zero)
-                    // {
-                    //     rec_state = STOP_MODE;
-                    //     atk_mo1053_reset();
-                    //     atk_mo1053_soft_reset();
-                    //     break;
-                    // }
-                    // atk_mo1053_send_music_data(audio_buf+i);
-                }
-            // for(int i=0;i<DATA_SIZE;i+=2)
-            // {
-            //     uint16_t data = (uint16_t)recv_buf[i]<<8 | (uint16_t)recv_buf[i+1];
-            //     CDC_Transmit_One_Byte(data);
-            // }
-            // uint8_t idx = 0;
-            // do
-            // {
-            //     if (atk_mo1053_send_music_data(audio_buf + idx) == 0)   /* 给VS10XX发送音频数据 */
-            //     {
-            //         idx += 32;
-            //     }
-            // }while(idx < AUDIO_DATA_BUF_SIZE);
-
-            // // while();
-            // atk_mo1053_reset(); //不确定要不要�?
-            // atk_mo1053_write_cmd(0x0b, 0X2020);  //不确定要不要�?
-            // res = atk_mo1053_send_music_data(audio_buf);
-            // // CDC_Transmit_One_Byte((uint16_t)rec_state);
-            // /*
-            // 存在问题�?
-            // atk_mo1053_send_music_data可能会发送失�?
-            // 如果套一层while循环，会导致程序卡死
-            // 正弦测试通过，但是播放音乐会卡死
-            // */
-
-            // playSpeakerTest();
-            // atk_mo1053_sine_test();
-            // if(!audioDataQueueIsEmpty())
-            // {
-            //     uint8_t audio_data[AUDIO_DATA_SIZE];
-            //     uint8_t res;
-            //     extern audioDataQueue_t audioDataQueue;
-            //     audioDataQueuePop(audio_data);
-            //     res = atk_mo1053_send_music_data(audio_data);
-            // }
-            // CDC_Transmit_One_Byte((uint16_t)audioDataQueue.size);
-            }
-            else
-            {
-                if(rec_state != STOP_MODE)
-                {
-                    atk_mo1053_reset();
-                    rec_state = STOP_MODE;
                 }
             }
         }
-        else
+        else    //停止
         {
             if(rec_state != STOP_MODE)
             {
@@ -326,9 +226,7 @@ int main(void)
                 rec_state = STOP_MODE;
             }
         }
-        // CDC_Transmit_One_Byte((uint16_t)rec_state); //测试用，之后删除
-        CDC_Transmit_FS(recv_buf, 550);
-        // CDC_Transmit_FS(&rec_state, 1);
+
         /* get pc data from usb */
         if (!pcDataQueueIsEmpty())
         {
@@ -338,18 +236,7 @@ int main(void)
             {
                 checkSpiCtrl(recv_buf, &pcDataPack);
             }
-            // playSpeakerTest();
-            // getAudioData(audio_buf, recv_buf, &pcDataPack);
-            /* get audio data from buffer and push into audio data queue */
-            // audioDataQueuePush8(recv_buf, AUDIO_DATA_SIZE);
         }
-
-        // if(!audioDataQueueIsEmpty())
-        // {
-        //     // playSpeaker(audioDataQueuePop());
-        //     playSpeakerTest();
-        // }
-        
     }
   /* USER CODE END 3 */
 }

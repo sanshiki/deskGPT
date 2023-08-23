@@ -1,6 +1,6 @@
 Dependencies for Project 'deskGPT', Target 'deskGPT': (DO NOT MODIFY !)
 F (startup_stm32f407xx.s)(0x64E20CCE)(--cpu Cortex-M4.fp -g --apcs=interwork -I.\RTE\_deskGPT-I"D:\Program Files\Keil5\ARM\PACK\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"D:\Program Files\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include"--pd "__UVISION_VERSION SETA 524" --pd "_RTE_ SETA 1" --pd "STM32F407xx SETA 1"--list startup_stm32f407xx.lst --xref -o deskgpt\startup_stm32f407xx.o --depend deskgpt\startup_stm32f407xx.d)
-F (../Core/Src/main.c)(0x64E36BC2)(--c99 -c --cpu Cortex-M4.fp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Applications/inc-I.\RTE\_deskGPT-I"D:\Program Files\Keil5\ARM\PACK\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"D:\Program Files\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include"-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o deskgpt\main.o --omf_browse deskgpt\main.crf --depend deskgpt\main.d)
+F (../Core/Src/main.c)(0x64E370F7)(--c99 -c --cpu Cortex-M4.fp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Applications/inc-I.\RTE\_deskGPT-I"D:\Program Files\Keil5\ARM\PACK\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"D:\Program Files\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include"-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o deskgpt\main.o --omf_browse deskgpt\main.crf --depend deskgpt\main.d)
 I (../Core/Inc/main.h)(0x64D5B4E1)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x633AE3DC)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x64E20CCA)
@@ -47,7 +47,7 @@ I (../Core/Inc/gpio.h)(0x64C8E2E8)
 I (../Applications/inc/atk_mo1053.h)(0x64CC81F0)
 I (../Applications/inc/delay.h)(0x64D5C737)
 I (../Applications/inc/recorder.h)(0x64DE3788)
-I (../Applications/inc/dataPackDecode.h)(0x64E36ACD)
+I (../Applications/inc/dataPackDecode.h)(0x64E3712A)
 I (../Applications/inc/dataQueue.h)(0x64E2E291)
 I (../USB_DEVICE/App/usbd_cdc_if.h)(0x64C8E2E9)
 I (../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h)(0x633AE35D)
@@ -1483,8 +1483,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x633AE3DD)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x633AE3DD)
 I (../Core/Inc/main.h)(0x64D5B4E1)
 I (D:\Program Files\Keil5\ARM\ARMCC\include\string.h)(0x588B8344)
-F (..\Applications\src\dataPackDecode.c)(0x64E36B0F)(--c99 -c --cpu Cortex-M4.fp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Applications/inc-I.\RTE\_deskGPT-I"D:\Program Files\Keil5\ARM\PACK\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"D:\Program Files\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include"-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o deskgpt\datapackdecode.o --omf_browse deskgpt\datapackdecode.crf --depend deskgpt\datapackdecode.d)
-I (../Applications/inc/dataPackDecode.h)(0x64E36ACD)
+F (..\Applications\src\dataPackDecode.c)(0x64E37133)(--c99 -c --cpu Cortex-M4.fp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Applications/inc-I.\RTE\_deskGPT-I"D:\Program Files\Keil5\ARM\PACK\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"D:\Program Files\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include"-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o deskgpt\datapackdecode.o --omf_browse deskgpt\datapackdecode.crf --depend deskgpt\datapackdecode.d)
+I (../Applications/inc/dataPackDecode.h)(0x64E3712A)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x633AE350)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x633AE34F)
 I (../Drivers/CMSIS/Include/core_cm4.h)(0x633AE359)

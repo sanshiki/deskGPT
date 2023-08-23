@@ -3,7 +3,7 @@
 <title>Static Call Graph - [deskGPT\deskGPT.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image deskGPT\deskGPT.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Mon Aug 21 21:51:04 2023
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Mon Aug 21 22:14:27 2023
 <BR><P>
 <H3>Maximum Stack Usage =        200 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1976,11 +1976,11 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[146]"></a>checkSpiCtrl</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, datapackdecode.o(i.checkSpiCtrl))
+<P><STRONG><a name="[146]"></a>checkSpiCtrl</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, datapackdecode.o(i.checkSpiCtrl))
 <BR><BR>[Called By]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[13e]"></a>dataPackInit</STRONG> (Thumb, 62 bytes, Stack size 0 bytes, datapackdecode.o(i.dataPackInit))
+<P><STRONG><a name="[13e]"></a>dataPackInit</STRONG> (Thumb, 58 bytes, Stack size 0 bytes, datapackdecode.o(i.dataPackInit))
 <BR><BR>[Called By]<UL><LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;checkDataHead
 <LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -2022,7 +2022,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[82]"></a>main</STRONG> (Thumb, 374 bytes, Stack size 0 bytes, main.o(i.main))
+<P><STRONG><a name="[82]"></a>main</STRONG> (Thumb, 338 bytes, Stack size 0 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 200<LI>Call Chain = main &rArr; atk_mo1053_restart_play &rArr; atk_mo1053_soft_reset &rArr; atk_mo1053_write_cmd &rArr; spi1_read_write_byte &rArr; HAL_SPI_TransmitReceive &rArr; SPI_EndRxTxTransaction &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[143]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;recoder_enter_rec_mode

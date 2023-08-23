@@ -45,6 +45,8 @@ APPID = '6267d3f7'
 APISecret = 'ZDRlMDQwMmZjNGJiOTBhYTc5ZWIxY2Ex'
 APIKey = '29cd024f42b3faa5e6c15303cf304bc1'
 
+final_result = ""
+
 
 class Ws_Param(object):
     # 初始化
@@ -110,6 +112,9 @@ def on_message(ws, message):
                 for w in i["cw"]:
                     result += w["w"]
             print("sid:%s call success!,data is:%s" % (sid, json.dumps(data, ensure_ascii=False)))
+            print("识别结果: " + result)
+            global final_result
+            final_result += result
     except Exception as e:
         print("receive msg,but parse exception:", e)
 
@@ -188,3 +193,4 @@ def iatRun(path):
     ws.run_forever(sslopt={"cert_reqs": ssl.CERT_NONE})
     time2 = datetime.now()
     print(time2-time1)   
+    return final_result

@@ -31,7 +31,6 @@ class dataPack:
         self.record_enable = True
         self.play_enable = False
         self.lost_data_test_enable = False
-        self.play_commplete = False
 
         #数据包头部
         for i in range(0, len(self.head)):
@@ -56,8 +55,6 @@ class dataPack:
             spi_ctrl = bytetools.setbit(spi_ctrl,5)
         if self.lost_data_test_enable:
             spi_ctrl = bytetools.setbit(spi_ctrl,4)
-        if self.play_commplete:
-            spi_ctrl = bytetools.setbit(spi_ctrl,3)
         self.bin = bytetools.setbyte(self.bin,len(self.head),spi_ctrl)        
     
     def addAudioData(self,audioData):

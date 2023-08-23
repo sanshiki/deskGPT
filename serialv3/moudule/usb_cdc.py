@@ -101,4 +101,4 @@ class USB_CDC:
 
     def usb_read_data(self, length):
         # 从设备读取数据
-        return self.device.read(self.endpoint_in, length, timeout=1000)
+        return self.device.read(self.endpoint_in, length, timeout=3000)

@@ -20,7 +20,6 @@ typedef struct __pc_usb_datapack_decode_struct
     uint8_t record_enable;
     uint8_t play_enable;
     uint8_t lost_data_test_enable;
-    uint8_t play_complete;
 } usb_datapack_decode_t;
 
 void dataPackInit(usb_datapack_decode_t *pdataPack);

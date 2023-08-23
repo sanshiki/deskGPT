@@ -105,7 +105,7 @@ def on_message(ws, message):
             print("sid:%s call error:%s code is:%s" % (sid, errMsg, code))
         else:
 
-            with open('./demo.pcm', 'ab') as f:
+            with open('./audioFile/pcmFile/demo.pcm', 'ab') as f:
                 f.write(audio)                
 
     except Exception as e:
@@ -133,8 +133,8 @@ def on_open(ws):
         d = json.dumps(d)
         print("------>开始发送文本数据")
         ws.send(d)
-        if os.path.exists('./demo.pcm'):
-            os.remove('./demo.pcm')
+        if os.path.exists('./audioFile/pcmFile/demo.pcm'):
+            os.remove('./audioFile/pcmFile/demo.pcm')
 
     thread.start_new_thread(run, ())
 

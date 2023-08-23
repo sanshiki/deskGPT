@@ -1,5 +1,5 @@
-# from moudule import iat
-# from moudule import tts
+from moudule import iat
+from moudule import tts
 from moudule import usb_cdc
 from moudule import fileIO
 from moudule import sampling
@@ -12,15 +12,29 @@ import math
 import threading
 from queue import Queue
 
+from moudule import pcm2wav
+from moudule import filter
+import soundfile as sf
+
+# 指定 PCM 文件路径
+pcm_file = 'audioFile/pcmFile/output.pcm'
+noise_pcm_file = 'audioFile/pcmFile/noise.pcm'
+filtered_pcm_file = 'audioFile/pcmFile/filtered_output.pcm'
+
+# 指定 WAV 文件路径
+wav_file = 'audioFile/wavFile/output.wav'
+noise_wav_file = 'audioFile/wavFile/noise.wav'
+filtered_wav_file = 'audioFile/wavFile/filtered_output.wav'
+
+# 科大讯飞认证信息
 APPID = '6267d3f7'
 APISecret = 'ZDRlMDQwMmZjNGJiOTBhYTc5ZWIxY2Ex'
 APIKey = '29cd024f42b3faa5e6c15303cf304bc1'
 AudioFile = r'demo.pcm'
 
+# 选择麦克风类型
 microphone_type = 'atk-mo1053'
 # microphone_type = 'inmp441'
-
-
 
 # 配置音频参数
 sample_width = 2  # 采样宽度（字节数）
@@ -63,6 +77,10 @@ def usb_cdc_thread():
             print(e)
             err_flag = True
 
+    pcDataPack.record_enable = False
+    pcDataPack.play_enable = False
+    pcDataPack.update()
+    usb.usb_send_data(pcDataPack.bin)
     usb.usb_close()
 
 
@@ -239,9 +257,6 @@ def getDataFromMircophone():
         else:
             pass
 
-    # for data in sampling_datav2.data:
-    #     txtFile.write(str(data) + " ")
-    
     # 关闭PCM文件
     output_file.close()
     txtFile.close()
@@ -254,21 +269,8 @@ def getDataFromMircophone():
         noise_file.close()
 
 
-def usb_cdc_speaker_thread():
-    while True:
-        usb.usb_send_data(pcDataPack.bin)
-        raw_data = usb.usb_read_data(550) # 读取数据
-        print("bin:")
-        print(pcDataPack.bin)
-        print("raw_data:")
-        print(bytes(raw_data))
-        print("len of raw_aata:",len(raw_data))
-        print(len(raw_data))
-
-
 def sendDataToSpeaker():
 
-    # audioFile = open(play_pcm_file,'rb')
     audioFile = open(play_wav_file,'rb')
 
     txtFile = fileIO.txtFileManager("wave_data.txt")
@@ -280,9 +282,6 @@ def sendDataToSpeaker():
     pcDataPack.lost_data_test_enable = False
     pcDataPack.play_commplete = False
     pcDataPack.update()
-    
-    # t = threading.Thread(target=usb_cdc_speaker_thread)
-    # t.start()
 
     cnt = 0
     send_buffer = b''
@@ -314,16 +313,38 @@ def sendDataToSpeaker():
                     sleep(0.013) #0.015
                     send_buffer = b''
                     cnt = 0
-                    # print(data)
         else:
             break
     #音频发送终止，发送结束标志
-    pcDataPack.play_commplete = True
+    pcDataPack.record_enable = False
+    pcDataPack.play_enable = False
     pcDataPack.update()
     usb.usb_send_data(pcDataPack.bin)
 
     txtFile.close()
 
 if __name__ == '__main__':
-    # getDataFromMircophone()
+    #--------------------录音--------------------#
+    getDataFromMircophone()
+
+    #--------------------降噪--------------------#
+    pcm2wav.pcm_to_wav(pcm_file, wav_file, sample_width, sample_rate, channels)
+    audio, sr = sf.read(wav_file)
+    # 设置小波变换参数
+    wavelet = 'db10'  # 选择小波基函数
+    level = 3  # 分解层数
+
+    # 执行小波变换
+    output_audio = filter.wavelet_transform(audio, wavelet, level)
+
+    sf.write(filtered_wav_file, output_audio, sr)
+
+    pcm2wav.wav_to_pcm(filtered_wav_file, filtered_pcm_file)
+
+    #--------------------语音识别--------------------#
+    iat_res = iat.iatRun(filtered_pcm_file)
+    print("iat_res:",iat_res)
+    tts.ttsRun(iat_res)
+    pcm2wav.pcm_to_wav(play_pcm_file, play_wav_file, sample_width, sample_rate, channels)
+
     sendDataToSpeaker()
