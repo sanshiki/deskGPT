@@ -18,8 +18,8 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "dac.h"
 #include "spi.h"
+#include "usart.h"
 #include "usb_device.h"
 #include "gpio.h"
 
@@ -58,7 +58,7 @@ uint8_t audio_buf[AUDIO_DATA_BUF_SIZE];
 uint8_t flg = 0;
 extern usb_datapack_decode_t pcDataPack;
 
-uint8_t rec_state = STOP_MODE;
+uint8_t rec_state = PLAY_MODE;
 
 /* USER CODE END PV */
 
@@ -87,31 +87,31 @@ uint8_t CDC_Transmit_One_Byte(uint16_t byte)
     // CDC_Transmit_FS((uint8_t *)send_buf, 200);
 }
 
-void playSpeakerTest(void)
-{
-    HAL_DAC_Start(&hdac,DAC_CHANNEL_1);
-                // for(int i=0;i<AUDIO_DATA_SIZE;i+=2)
-                // {
-                //     uint16_t audio_data = (uint16_t)audio_buf[i]<<8 | (uint16_t)audio_buf[i+1];
-                //     HAL_DAC_SetValue(&hdac,DAC_CHANNEL_1,DAC_ALIGN_12B_R,audio_data);
-                //     // HAL_Delay(1);
-                // }
-    static uint16_t val = 0;
-    HAL_DAC_SetValue(&hdac,DAC_CHANNEL_1,DAC_ALIGN_12B_R,val);
-    val += 2;
-    if(val == 4096)
-    {
-        val = 0;
-    }
-    HAL_DAC_Stop(&hdac,DAC_CHANNEL_1);
-}
+// void playSpeakerTest(void)
+// {
+//     HAL_DAC_Start(&hdac,DAC_CHANNEL_1);
+//                 // for(int i=0;i<AUDIO_DATA_SIZE;i+=2)
+//                 // {
+//                 //     uint16_t audio_data = (uint16_t)audio_buf[i]<<8 | (uint16_t)audio_buf[i+1];
+//                 //     HAL_DAC_SetValue(&hdac,DAC_CHANNEL_1,DAC_ALIGN_12B_R,audio_data);
+//                 //     // HAL_Delay(1);
+//                 // }
+//     static uint16_t val = 0;
+//     HAL_DAC_SetValue(&hdac,DAC_CHANNEL_1,DAC_ALIGN_12B_R,val);
+//     val += 2;
+//     if(val == 4096)
+//     {
+//         val = 0;
+//     }
+//     HAL_DAC_Stop(&hdac,DAC_CHANNEL_1);
+// }
 
-void playSpeaker(uint32_t audio_data)
-{
-    HAL_DAC_Start(&hdac,DAC_CHANNEL_1);
-    HAL_DAC_SetValue(&hdac,DAC_CHANNEL_1,DAC_ALIGN_12B_R,audio_data);
-    HAL_DAC_Stop(&hdac,DAC_CHANNEL_1);
-}
+// void playSpeaker(uint32_t audio_data)
+// {
+//     HAL_DAC_Start(&hdac,DAC_CHANNEL_1);
+//     HAL_DAC_SetValue(&hdac,DAC_CHANNEL_1,DAC_ALIGN_12B_R,audio_data);
+//     HAL_DAC_Stop(&hdac,DAC_CHANNEL_1);
+// }
 /* USER CODE END 0 */
 
 /**
@@ -146,7 +146,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USB_DEVICE_Init();
   MX_SPI1_Init();
-  MX_DAC_Init();
+  MX_UART4_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -154,10 +154,14 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
     atk_mo1053_init();
+    atk_mo1053_reset();
+    atk_mo1053_soft_reset();
+    atk_mo1053_restart_play();
     uint16_t cnt = 0;
     uint16_t idx = 0;
     while (1)
     {
+        HAL_UART_Transmit(&huart4, &rec_state, 1, 100);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -170,6 +174,7 @@ int main(void)
                 atk_mo1053_reset();
                 atk_mo1053_soft_reset();
                 recoder_enter_rec_mode(0);
+				atk_mo1053_set_volume(0x00);
                 rec_state = RECORD_MODE;
                 delay_ms(10);
             }
@@ -197,8 +202,8 @@ int main(void)
                 atk_mo1053_set_all();
                 atk_mo1053_reset_decode_time();
                 atk_mo1053_spi_speed_high();
-                atk_mo1053_write_cmd(SPI_AICTRL0,8000);	//设置采样率,设置为16Khz
-                atk_mo1053_write_cmd(SPI_CLOCKF,0X2000);	//设置VS10XX的时钟,MULT:2倍频;ADD:不允许;CLK:12.288Mhz	
+                atk_mo1053_write_cmd(SPI_AICTRL0,8000);	//设置采样�?,设置�?16Khz
+                atk_mo1053_write_cmd(SPI_CLOCKF,0X2000);	//设置VS10XX的时�?,MULT:2倍频;ADD:不允�?;CLK:12.288Mhz	
                 rec_state = PLAY_MODE;
                 delay_ms(10);
             }
@@ -207,7 +212,7 @@ int main(void)
             for(int i=0;i<AUDIO_DATA_BUF_SIZE;i+=AUDIO_DATA_SIZE)
             {
                 uint16_t timeout_cnt = 0;
-                //防止发送失败，导致程序卡死
+                //防止发�?�失败，导致程序卡死
                 while(atk_mo1053_send_music_data(audio_buf+i))
                 {
                     timeout_cnt++;
@@ -223,6 +228,7 @@ int main(void)
             if(rec_state != STOP_MODE)
             {
                 atk_mo1053_reset();
+                atk_mo1053_set_volume(0x00);
                 rec_state = STOP_MODE;
             }
         }

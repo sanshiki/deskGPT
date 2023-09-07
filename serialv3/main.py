@@ -5,6 +5,7 @@ from moudule import fileIO
 from moudule import sampling
 from moudule import bytetools
 from moudule import datapack
+from moudule import chatGPT
 from time import sleep,time
 
 import wave
@@ -61,13 +62,18 @@ play_wav_file = 'audioFile/wavFile/demo.wav'
 # usb-cdc线程函数
 err_flag = False
 record_flag = True
+no_voice_flag = False
 def usb_cdc_thread():
     global err_flag
     global record_flag
 
-    usb.usb_open()
-    while record_flag == True and err_flag == False:
+    print("usb_cdc_thread start")
+
+    while record_flag == True and err_flag == False and no_voice_flag == False:
         try:
+            pcDataPack.record_enable = True
+            pcDataPack.play_enable = False
+            pcDataPack.update()
             usb.usb_send_data(pcDataPack.bin) # 发送数据包
             raw_data = usb.usb_read_data(200) # 读取数据
             if raw_data:
@@ -77,11 +83,10 @@ def usb_cdc_thread():
             print(e)
             err_flag = True
 
-    pcDataPack.record_enable = False
-    pcDataPack.play_enable = False
-    pcDataPack.update()
-    usb.usb_send_data(pcDataPack.bin)
-    usb.usb_close()
+    # pcDataPack.record_enable = True
+    # pcDataPack.play_enable = False
+    # pcDataPack.update()
+    # usb.usb_send_data(pcDataPack.bin)
 
 
 
@@ -112,6 +117,11 @@ def getDataFromMircophone():
 
     global err_flag
     global record_flag
+    global no_voice_flag
+
+    record_flag = True
+    err_flag = False
+    no_voice_flag = False
 
     #开启usb-cdc线程
     t = threading.Thread(target=usb_cdc_thread)
@@ -131,7 +141,11 @@ def getDataFromMircophone():
             break
         if  time() - no_voice_time > 3:
             record_flag = False
-            print("no voice for 3 seconds")
+            if abs(record_time - no_voice_time) < 0.01:
+                print("no voice for 3 seconds from the beginning")
+                no_voice_flag = True
+            else:
+                print("no voice for 3 seconds")
             break
         if size != 0:
             raw_data = q.get()
@@ -316,35 +330,65 @@ def sendDataToSpeaker():
         else:
             break
     #音频发送终止，发送结束标志
-    pcDataPack.record_enable = False
-    pcDataPack.play_enable = False
-    pcDataPack.update()
-    usb.usb_send_data(pcDataPack.bin)
+    sleep(0.1)
+    for i in range(10):
+        pcDataPack.record_enable = False
+        pcDataPack.play_enable = False
+        pcDataPack.update()
+        usb.usb_send_data(pcDataPack.bin)
 
     txtFile.close()
 
 if __name__ == '__main__':
-    #--------------------录音--------------------#
-    getDataFromMircophone()
 
-    #--------------------降噪--------------------#
-    pcm2wav.pcm_to_wav(pcm_file, wav_file, sample_width, sample_rate, channels)
-    audio, sr = sf.read(wav_file)
-    # 设置小波变换参数
-    wavelet = 'db10'  # 选择小波基函数
-    level = 3  # 分解层数
+    #--------------------初始化--------------------#
+    usb.usb_open()
+    chatGPT.pre_knowledge_init()
+    # sendDataToSpeaker()
 
-    # 执行小波变换
-    output_audio = filter.wavelet_transform(audio, wavelet, level)
+    while True:
+        #--------------------录音--------------------#
+        for i in range(5):
+            pcDataPack.record_enable = True
+            pcDataPack.play_enable = False
+            pcDataPack.update()
+            usb.usb_send_data(pcDataPack.bin)
 
-    sf.write(filtered_wav_file, output_audio, sr)
+        sleep(0.1)
 
-    pcm2wav.wav_to_pcm(filtered_wav_file, filtered_pcm_file)
+        getDataFromMircophone()
 
-    #--------------------语音识别--------------------#
-    iat_res = iat.iatRun(filtered_pcm_file)
-    print("iat_res:",iat_res)
-    tts.ttsRun(iat_res)
-    pcm2wav.pcm_to_wav(play_pcm_file, play_wav_file, sample_width, sample_rate, channels)
+        if err_flag == False and no_voice_flag == False:
+            #--------------------降噪--------------------#
+            pcm2wav.pcm_to_wav(pcm_file, wav_file, sample_width, sample_rate, channels)
+            audio, sr = sf.read(wav_file)
+            # 设置小波变换参数
+            wavelet = 'db10'  # 选择小波基函数
+            level = 3  # 分解层数
 
-    sendDataToSpeaker()
+            # 执行小波变换
+            output_audio = filter.wavelet_transform(audio, wavelet, level)
+
+            sf.write(filtered_wav_file, output_audio, sr)
+
+            pcm2wav.wav_to_pcm(filtered_wav_file, filtered_pcm_file)
+
+            #--------------------语音识别--------------------#
+            iat_res = iat.iatRun(filtered_pcm_file)
+            print("iat_res:",iat_res)
+
+            #--------------------发送问题至chatGPT--------------------#
+            chatGPT.send_to_chatGPT(iat_res)
+
+            with open('./config/answer.txt', 'r', encoding='utf-8') as f:
+                answer = f.read()
+
+            #--------------------语音合成--------------------#
+
+            tts.ttsRun(answer)
+            pcm2wav.pcm_to_wav(play_pcm_file, play_wav_file, sample_width, sample_rate, channels)
+
+            sendDataToSpeaker()
+
+    #--------------------关闭--------------------#
+    usb.usb_close()

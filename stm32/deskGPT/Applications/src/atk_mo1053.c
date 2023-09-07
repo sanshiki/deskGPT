@@ -29,7 +29,7 @@
 /* ATK_MO1053 默认设置参数 */
 static _vs10xx_obj vsset =
     {
-        220, /* 音量     249(100~250) */
+        249, /* 音量     249(100~250) */
         6,   /* 低音上限 60Hz */
         15,  /* 低音提升 15dB */
         10,  /* 高音下限 10Khz */
@@ -648,6 +648,8 @@ void atk_mo1053_set_volume(uint8_t volx)
     volt <<= 8;
     volt += 254 - volx;                  /* 得到音量设置后大小 */
     atk_mo1053_write_cmd(SPI_VOL, volt); /* 设置音量 */
+
+    atk_mo1053_write_ram(0xc045, volt); /* 设置音量 */
 }
 
 /**

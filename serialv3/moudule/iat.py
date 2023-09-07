@@ -180,6 +180,8 @@ def on_open(ws):
 def iatRun(path):   
     time1 = datetime.now()
     global wsParam
+    global final_result
+    final_result = ""
     wsParam = Ws_Param(APPID='6267d3f7', APISecret='ZDRlMDQwMmZjNGJiOTBhYTc5ZWIxY2Ex',
                        APIKey='29cd024f42b3faa5e6c15303cf304bc1',
                     #    AudioFile=r'iat_mp3_8k.mp3')
@@ -193,4 +195,5 @@ def iatRun(path):
     ws.run_forever(sslopt={"cert_reqs": ssl.CERT_NONE})
     time2 = datetime.now()
     print(time2-time1)   
+    print("final_result: " + final_result)
     return final_result
