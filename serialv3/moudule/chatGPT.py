@@ -51,10 +51,11 @@ def gpt_35_api_stream(messages: list):
         answer_now=completion['content']
         print(answer_now)
 
-        #有时charGPT会莫名其妙生成一个“你的回答：”的回答，这里将其去掉
-        extra = "你的回答："
-        if extra in completion['content']:
-            completion['content'] = completion['content'].replace(extra,"")
+        #chatGPT生成的额外回答，需要去掉
+        extra = ["你的回答：","小对立："]
+        for i in extra:
+            if i in completion['content']:
+                completion['content'] = completion['content'].replace(i,"")
 
         file = open(answer_txt, 'w+', encoding='utf-8')
         file.write(completion['content'])
@@ -80,11 +81,6 @@ def send_to_chatGPT(user_input=None):
     global answer_now
     global cnt
     global pre_knowledge
-
-# if __name__ == '__main__':
-    #file = open('question.txt', 'r', encoding='utf-8')
-    #read_text = file.read()
-    #user_input = read_text
 
     if  user_input.lower() != '结束对话':
         
