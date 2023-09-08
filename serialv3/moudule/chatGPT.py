@@ -51,6 +51,11 @@ def gpt_35_api_stream(messages: list):
         answer_now=completion['content']
         print(answer_now)
 
+        #有时charGPT会莫名其妙生成一个“你的回答：”的回答，这里将其去掉
+        extra = "你的回答："
+        if extra in completion['content']:
+            completion['content'] = completion['content'].replace(extra,"")
+
         file = open(answer_txt, 'w+', encoding='utf-8')
         file.write(completion['content'])
         return (True, '')
