@@ -1,0 +1,3 @@
+/media/ziyi/My Passport/deskGPT/Emoji/build/CMakeFiles/edit_cache.dir
+/media/ziyi/My Passport/deskGPT/Emoji/build/CMakeFiles/rebuild_cache.dir
+/media/ziyi/My Passport/deskGPT/Emoji/build/CMakeFiles/cvt.dir

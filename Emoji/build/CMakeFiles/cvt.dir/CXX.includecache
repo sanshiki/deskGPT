@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/media/ziyi/My Passport/deskGPT/Emoji/cvt.cpp
+opencv4/opencv2/opencv.hpp
+-
+iostream
+-
+
